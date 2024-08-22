@@ -60,11 +60,12 @@ def print_tree(startpath, prefix=''):
 
     for entry in entries:
         if entry.is_dir():
-            if entry.name not in ('node_modules', 'color_tree.py'):
+            if entry.name not in ('.git', 'node_modules'):
                 print(f"{prefix}{colors['folder']}{entry.name}/\033[0m")
                 print_tree(entry.path, prefix + "│   ")
         else:
-            print(f"{prefix}{colorize_filename(entry.name)}")
+            if entry.name != 'Makefile':
+                print(f"{prefix}{colorize_filename(entry.name)}")
 
 if __name__ == "__main__":
     clear_terminal()  # Clear terminal before printing tree
